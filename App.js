@@ -4,6 +4,7 @@ const PORT = 3000;
 
 // Set view engine to EJS
 app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Blog data
 const blogs = [

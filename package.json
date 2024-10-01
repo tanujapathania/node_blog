@@ -17,5 +17,11 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.15",
     "path": "^0.12.7"
+  },
+  "engines": {
+    "node": ">=14.x.x"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
