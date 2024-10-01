@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn v1
+.yarn-integrity
+
+# Yarn v2 and above
+.pnp.*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.yarn/releases/*
+
+# Testing
+/coverage
+
+# Production
+/build
+/dist
+
+# dotenv environment variables file
+.env
+.env.test
+.env.local
+
+# VSCode settings
+.vscode/
+
+# MacOS system files
+.DS_Store
+
+# Logs from react-native
+*.log*
+
+# Optional lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

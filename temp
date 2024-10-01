@@ -1,0 +1,132 @@
+// const blogSchema = require('../model/blog/blogs');
+// const cloudinary = require('cloudinary').v2;
+// const UserRegister = require("../model/auth/register");
+// const cron = require("node-cron");
+// const moment = require('moment'); // Useful for handling date and time
+
+// // Function to handle scheduling a post
+// const schedulePost = (postId, publishTime) => {
+//     const dateTime = moment(publishTime).format('m H D M *'); // Convert time to cron format
+    
+//     cron.schedule(dateTime, async () => {
+//         try {
+//             const post = await blogSchema.findById(postId);
+//             if (post) {
+//                 post.isPublished = true;
+//                 await post.save();
+//                 console.log(`Post ${postId} is now published!`);
+//             }
+//         } catch (error) {
+//             console.error("Error in scheduling post:", error);
+//         }
+//     });
+// };
+
+// const createPost = async (req, res, next) => {
+//     try {
+//         const { title, content, userId, category, publishTime } = req.body;
+//         const newPost = new blogSchema({
+//             title,
+//             content,
+//             category,
+//             publishTime, // Store the publish time
+//             isPublished: false, // Default: not published
+//         });
+
+//         const savedPost = await newPost.save();
+
+//         // Update the user's posts field
+//         await UserRegister.findByIdAndUpdate(
+//             userId,
+//             { $push: { posts: savedPost } },
+//             { new: true }
+//         );
+
+//         // Schedule the post for future publishing if a publishTime is provided
+//         if (publishTime) {
+//             schedulePost(savedPost._id, publishTime);
+//         }
+
+//         res.status(200).json({ success: true, message: "Post Created and scheduled for publishing" });
+
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ success: false, message: "Internal Server Error" });
+//     }
+// };
+
+// const getPost = async (req, res, next) => {
+//     try {
+//         let posts = await blogSchema.find({ isPublished: true }); // Only fetch published posts
+//         res.status(200).json(posts);
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: "Internal Server Error" });
+//     }
+// };
+
+// const getPostsByCategory = async (req, res, next) => {
+//     try {
+//         const { category } = req.query;
+//         console.log(category);
+
+//         const filter = { category, isPublished: true } || "All"; // Only fetch published posts
+//         const filteredPost = await blogSchema.find(filter);
+//         console.log("filteredPost", filteredPost);
+
+//         res.status(200).json({ filteredPost });
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ success: false, message: "Internal Server Error" });
+//     }
+// };
+
+// const deletePost = async (req, res, next) => {
+//     try {
+//         const { blogId, userId } = req.query;
+//         const postToDelete = await blogSchema.findByIdAndDelete(blogId);
+
+//         if (!postToDelete) {
+//             return res.status(404).json({ success: false, message: "Post not found" });
+//         }
+
+//         const user = await UserRegister.findById(userId);
+
+//         if (!user) {
+//             return res.status(404).json({ success: false, message: "User not found" });
+//         }
+
+//         user.posts = user.posts.filter(post => post._id.toString() !== blogId);
+//         await user.save();
+
+//         res.status(200).json({ success: true, message: "Post deleted successfully" });
+
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ success: false, message: "Internal Server Error" });
+//     }
+// };
+
+// module.exports = {
+//     createPost,
+//     getPost,
+//     getPostsByCategory,
+//     deletePost
+// };
+
+
+// const schedulePost = (postId, publishTime) => {
+//     const dateTime = moment(publishTime).format('m H D M *'); // Convert time to cron format
+    
+//     cron.schedule(dateTime, async () => {
+//         try {
+//             const post = await blogSchema.findById(postId);
+//             if (post) {
+//                 post.isPublished = true; // Mark as published
+//                 await post.save(); // Save the changes to the database
+//                 console.log(`Post ${postId} is now published!`);
+//             }
+//         } catch (error) {
+//             console.error("Error in scheduling post:", error);
+//         }
+//     });
+// };
