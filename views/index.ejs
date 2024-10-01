@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .blog-post {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+    .blog-post h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to My Blog</h1>
+  <% blogs.forEach(function(blog) { %>
+    <div class="blog-post">
+      <h2><%= blog.title %></h2>
+      <p><strong>Author:</strong> <%= blog.author %></p>
+      <p><%= blog.content %></p>
+    </div>
+  <% }) %>
+</body>
+</html>
